@@ -1,0 +1,6 @@
+indexes:
+
+- kind: books
+  ancestor: no
+  properties:
+  - name: title
