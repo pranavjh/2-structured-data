@@ -46,7 +46,8 @@ function query (token, cb) {
 function filterQuery (token, cb) {
   const q = ds.createQuery([kind])
     .filter('title', '>=', token)
-    .limit(10);
+    .filter('title', '<',  token + '\ufffd');
+   // .limit(100);
 
   ds.runQuery(q, (err, entities, nextQuery) => {
     if (err) {

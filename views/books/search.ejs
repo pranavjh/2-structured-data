@@ -18,18 +18,41 @@
           availableTags[i] = book.title;
           i++;
         });
+
+        // Create the list element:
+        var list = document.createElement('ul');
+
+        for(var j = 0; j < availableTags.length; j++) {
+          // Create the list item:
+          var item = document.createElement('li');
+
+          // Set its contents:
+          item.appendChild(document.createTextNode(availableTags[j]));
+
+          // Add it to the list:
+          list.appendChild(item);
+        }
+
+        document.getElementById('matches').appendChild(list);
+        document.getElementById('tags').focus();
+        document.getElementById('tags').value = "<%- value %>";
+        /*
         $( "#tags" ).autocomplete({
           source: availableTags
         });
+        */
       });
+
+      function getMatches() {
+        window.location = ("/books/search/" + document.getElementById("tags").value);
+        //document.getElementById('foo').appendChild(makeUL(options[0]));
+      }
     </script>
     <br>
-    <form method="post">
-      <div class="ui-widget">
-        <label for="tags" name="label">Search for Products: </label>
-        <input id="tags" name="tags" value=<%- value %>>
-        <input name="submit" type="submit">
-      </div>
-    </form>
+    <div class="ui-widget">
+      <label for="tags" name="label">Search for Products: </label>
+      <input id="tags" type="text" name="tags" onkeyup="getMatches();" autofocus="autofocus">
+      <div id="matches"></div>
+    </div>
   </body>
 </html>

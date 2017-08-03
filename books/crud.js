@@ -45,14 +45,22 @@ router.get('/products', (req, res, next) => {
   });
 });
 
+/*
 router.get('/search', (req, res, next) => {
   res.render('books/search', {
     books: {},
     value: "test"
   });
 });
+*/
 
-router.post('/search', (req, res, next) => {
+router.get('/search', (req, res, next) => {
+  res.render('books/searchInit', {
+    books: {}
+  });
+});
+
+router.get('/search/:tags', (req, res, next) => {
   /*
   const data = req.body;
   var token = '';
@@ -63,19 +71,17 @@ router.post('/search', (req, res, next) => {
   });
   */
 
-  getModel().filterQuery(req.body.tags, (err, entities) => {
+  getModel().filterQuery(req.params.tags, (err, entities) => {
     if (err) {
       next(err);
       return;
     }
-    /*
     res.render('books/search', {
       books: JSON.stringify(entities, ['title']),
-      value: req.body.tags
+      value: req.params.tags
     });
-    */
-    res.write("<html><body><h1>Yay!! Yippee!!!</h1></body></html>");
-    res.end();
+    //res.write("<html><body><h1>Yay!! Yippee!!!</h1></body></html>");
+    //res.end();
   });
 });
 
